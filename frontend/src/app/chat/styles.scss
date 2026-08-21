@@ -56,3 +56,18 @@ body {
   outline: 2px solid var(--upds-red);
   outline-offset: 2px;
 }
+
+/* Enlaces detectados automaticamente dentro de las respuestas del chat.
+   Va aqui (global) y no en chat.scss porque se inyectan via [innerHTML],
+   y ese contenido no recibe los estilos encapsulados del componente. */
+.msg-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.msg-link:hover {
+  opacity: 0.8;
+}

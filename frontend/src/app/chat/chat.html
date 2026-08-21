@@ -1,0 +1,98 @@
+<div class="chat-page-wrapper">
+<div class="chat-page">
+  <header class="chat-header">
+    <div class="brand">
+      <span class="brand-badge">
+        <img src="logo-upds.png" alt="Logo UPDS" />
+      </span>
+      <div class="brand-text">
+        <span class="brand-title">UPDS Sucre</span>
+        <span class="brand-subtitle">
+          <span class="status-dot" aria-hidden="true"></span>
+          Asistente de Inducción · En línea
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <div class="header-rule" aria-hidden="true"></div>
+
+  <main class="chat-body">
+    @if (!hasStarted()) {
+      <section class="welcome">
+        <img src="logo-upds.png" alt="Logo UPDS" class="welcome-logo" />
+        <h1>Hola, soy tu asistente de inducción 👋</h1>
+        <p>Pregúntame sobre trámites, horarios, ubicación de aulas o cualquier duda para empezar bien tu ciclo en UPDS Sucre.</p>
+
+        <div class="chips">
+          @for (sugerencia of sugerencias; track sugerencia) {
+            <button type="button" class="chip" (click)="usarSugerencia(sugerencia)">
+              {{ sugerencia }}
+            </button>
+          }
+        </div>
+      </section>
+    }
+
+    @if (hasStarted()) {
+      <section class="messages" aria-live="polite">
+        @for (mensaje of messages(); track mensaje.id) {
+          <div class="message-row" [class.is-user]="mensaje.role === 'user'">
+            @if (mensaje.role === 'bot') {
+              <span class="avatar" aria-hidden="true">
+                <span class="avatar-dot dot-blue"></span>
+                <span class="avatar-dot dot-red"></span>
+                <span class="avatar-dot dot-green"></span>
+              </span>
+            }
+            <div class="bubble" [class.bubble-bot]="mensaje.role === 'bot'" [class.bubble-user]="mensaje.role === 'user'">
+              <p [innerHTML]="mensaje.text | linkify"></p>
+              <span class="time">{{ mensaje.time }}</span>
+            </div>
+          </div>
+        }
+
+        @if (isTyping()) {
+          <div class="message-row">
+            <span class="avatar" aria-hidden="true">
+              <span class="avatar-dot dot-blue"></span>
+              <span class="avatar-dot dot-red"></span>
+              <span class="avatar-dot dot-green"></span>
+            </span>
+            <div class="bubble bubble-bot bubble-typing" aria-label="El asistente está escribiendo">
+              <span class="typing-dot dot-blue"></span>
+              <span class="typing-dot dot-red"></span>
+              <span class="typing-dot dot-green"></span>
+            </div>
+          </div>
+        }
+
+        <div #scrollAnchor></div>
+      </section>
+    }
+  </main>
+
+  <footer class="chat-input-bar">
+    <input
+      type="text"
+      class="chat-input"
+      placeholder="Escribe tu pregunta..."
+      [ngModel]="inputValue()"
+      (ngModelChange)="inputValue.set($event)"
+      (keyup.enter)="enviarMensaje()"
+      aria-label="Escribe tu pregunta para el asistente"
+    />
+    <button
+      type="button"
+      class="send-btn"
+      (click)="enviarMensaje()"
+      [disabled]="!inputValue().trim()"
+      aria-label="Enviar mensaje"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 11.5L20.5 3.5L14.5 21L11.5 13L3 11.5Z" fill="currentColor" />
+      </svg>
+    </button>
+  </footer>
+</div>
+</div>
