@@ -1,0 +1,34 @@
+<!--
+  CAMBIO IMPORTANTE: el panel ya NO usa @if. Con @if, Angular destruye
+  por completo el componente <app-chat> (y su conversación) cada vez que
+  se cierra, y crea uno nuevo vacío al reabrir.
+
+  Ahora el panel siempre está en el DOM; solo se oculta/muestra con CSS
+  (clase .is-open). Así <app-chat> nunca se destruye mientras no recargues
+  la página, y la conversación se mantiene al cerrar y reabrir.
+-->
+<div class="widget-panel" [class.is-open]="isOpen()">
+  <button
+    type="button"
+    class="widget-panel-close"
+    (click)="toggle()"
+    aria-label="Cerrar asistente"
+  >
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+    </svg>
+  </button>
+  <app-chat></app-chat>
+</div>
+
+<button
+  type="button"
+  class="widget-fab"
+  [class.is-hidden]="isOpen()"
+  (click)="toggle()"
+  aria-label="Abrir asistente de inducción UPDS Sucre"
+>
+  <span class="fab-pulse" aria-hidden="true"></span>
+  <img src="logo-upds.png" alt="" />
+  <span class="fab-status" aria-hidden="true"></span>
+</button>

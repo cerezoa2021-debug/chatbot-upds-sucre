@@ -1,0 +1,154 @@
+:host {
+  display: contents;
+}
+
+/* ---------- Bolita flotante (posición fija, sin arrastre) ---------- */
+.widget-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(18, 41, 92, 0.28);
+  z-index: 1000;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.widget-fab.is-hidden {
+  display: none;
+}
+
+.widget-fab:hover {
+  transform: scale(1.06);
+  box-shadow: 0 10px 28px rgba(18, 41, 92, 0.34);
+}
+
+.widget-fab:active {
+  transform: scale(0.96);
+}
+
+.widget-fab img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+}
+
+.fab-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--upds-blue);
+  opacity: 0.35;
+  animation: pulse 2.8s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+  70% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.fab-status {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--upds-green);
+  border: 2px solid #fff;
+  z-index: 2;
+}
+
+/* ---------- Panel del chat ---------- */
+/* CAMBIO: display:none por defecto en vez de *ngIf/@if, para que el
+   componente <app-chat> nunca se destruya y la conversacion persista
+   mientras no se recargue la pagina completa. */
+.widget-panel {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 380px;
+  height: 620px;
+  max-height: calc(100dvh - 48px);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(18, 41, 92, 0.3);
+  z-index: 1000;
+  transform-origin: bottom right;
+}
+
+.widget-panel.is-open {
+  display: block;
+  animation: pop-in 0.2s ease;
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.widget-panel-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.15s ease;
+}
+
+.widget-panel-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ---------- Responsive: pantalla completa en movil ---------- */
+@media (max-width: 600px) {
+  .widget-panel.is-open {
+    display: flex;
+  }
+
+  .widget-panel {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    border-radius: 0;
+    bottom: 0;
+    right: 0;
+  }
+}
