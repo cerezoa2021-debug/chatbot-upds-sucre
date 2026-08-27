@@ -29,10 +29,10 @@ export class Chat implements AfterViewChecked {
   protected readonly hasStarted = computed(() => this.messages().length > 0);
 
   protected readonly sugerencias = [
-    '¿Cómo me inscribo?',
-    '¿Dónde está mi aula?',
+    '¿Contactos de marketing?',
+    '¿Que decanos existen?',
     'Horarios de atención',
-    'Requisitos de matrícula',
+    '¿Dónde está la cafetería?',
   ];
 
   private idCounter = 0;
