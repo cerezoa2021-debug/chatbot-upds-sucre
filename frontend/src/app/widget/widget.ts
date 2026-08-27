@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Chat } from '../chat/chat';
+import { WidgetStateService } from '../services/widget-state.service';
 
 @Component({
   selector: 'app-widget',
@@ -9,9 +10,5 @@ import { Chat } from '../chat/chat';
   styleUrl: './widget.scss',
 })
 export class Widget {
-  protected readonly isOpen = signal(false);
-
-  protected toggle(): void {
-    this.isOpen.update((valor) => !valor);
-  }
+  protected readonly widgetState = inject(WidgetStateService);
 }

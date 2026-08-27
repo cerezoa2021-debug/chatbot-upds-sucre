@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+
+.hero {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--upds-blue-dark);
+  overflow: hidden;
+}
+
+.watermark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(80px, 18vw, 220px);
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  white-space: nowrap;
+  user-select: none;
+}

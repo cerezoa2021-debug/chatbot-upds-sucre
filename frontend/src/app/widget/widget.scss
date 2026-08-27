@@ -10,9 +10,10 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
+  overflow: hidden;
   border: none;
   background: #fff;
-  padding: 10px;
+  padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,12 +36,16 @@
   transform: scale(0.96);
 }
 
-.widget-fab img {
+/* CAMBIO: overflow:hidden en el boton (arriba) recorta cualquier borde
+   cuadrado del PNG que sobresalga del circulo. object-fit:contain
+   mantiene el logo completo visible, sin recortar su contenido. */
+.fab-logo {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  position: relative;
-  z-index: 1;
+  border-radius: 50%;
 }
 
 .fab-pulse {

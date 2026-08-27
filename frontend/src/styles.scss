@@ -56,3 +56,23 @@ body {
   outline: 2px solid var(--upds-red);
   outline-offset: 2px;
 }
+
+/* Enlaces detectados automaticamente dentro de las respuestas del chat.
+   Va aqui (global) y no en chat.scss porque se inyectan via [innerHTML],
+   y ese contenido no recibe los estilos encapsulados del componente. */
+.msg-link,
+.msg-link:link,
+.msg-link:visited {
+  /* CAMBIO: antes era "color: inherit", pero el navegador igual aplicaba
+     su morado por defecto de "link visitado" encima. Forzamos un azul
+     claro explicito, con buen contraste sobre la burbuja azul del bot. */
+  color: #cfe0ff;
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.msg-link:hover {
+  opacity: 0.8;
+}
