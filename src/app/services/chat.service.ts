@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface RespuestaBot {
   respuesta: string;
@@ -9,10 +10,7 @@ export interface RespuestaBot {
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
-  // NOTA: en local apunta a tu backend NestJS corriendo en el puerto 3000.
-  // Cuando desplieguen al servidor, esto debe cambiar a la URL real
-  // (idealmente a traves de un archivo de environments de Angular).
-  private readonly baseUrl = 'http://localhost:3000';
+  private readonly baseUrl = environment.apiUrl;
 
   constructor(private readonly http: HttpClient) {}
 
